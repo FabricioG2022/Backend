@@ -1,0 +1,27 @@
+[
+    {
+        "title": "Motorola G71",
+        "description": "Colores mas vibrantes, full HD+, OLED, 6.4 pulgadas, DCI-P3, rango de colores 25% mas amplio",
+        "price": "$60.999",
+        "thumbnail": "https://tienda.movistar.com.ar/media/catalog/product/cache/1d01ed3f1ecf95fcf479279f9ae509ad/g/7/g71-verde-frente.png",
+        "code": "G71",
+        "stock": "50"
+    },
+    {
+        "title": "Motorola G22",
+        "description": "Colores mas vibrantes, full HD+, OLED, 6.4 pulgadas, DCI-P3, rango de colores 25% mas amplio",
+        "price": "$59.999",
+        "thumbnail": "https://tienda.movistar.com.ar/media/catalog/product/cache/1d01ed3f1ecf95fcf479279f9ae509ad/g/7/g71-verde-frente.png",
+        "code": "G22",
+        "stock": "30"
+    },
+    {
+        "title": "Motorola E40",
+        "description": "Colores mas vibrantes, full HD+, OLED, 6.4 pulgadas, DCI-P3, rango de colores 25% mas amplio",
+        "price": "$52.999",
+        "thumbnail": "https://tienda.movistar.com.ar/media/catalog/product/cache/1d01ed3f1ecf95fcf479279f9ae509ad/g/7/g71-verde-frente.png",
+        "code": "E40",
+        "stock": "10"
+    }
+
+]
