@@ -16,11 +16,9 @@ cartRouter.get('/:cid', (res,req) => {
 })
 
 cartRouter.post('/:cid/product/:pid', (res,req) => {
-    this.productos.push({product: id, quantity:50++})
+    this.productos.push({product: id, quantity:"50"})
    
 })
 
 
-module.exports = {
-    cartRouter,
-}
+module.exports = cartRouter;
