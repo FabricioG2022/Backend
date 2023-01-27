@@ -1,11 +1,11 @@
 const express = require ("express");
 const productRouter = express.Router();
-const {ProductManager} = require ("../pertenencia")
+const ProductManager = require ("../persistencia")
 
 
 
-productRouter.get('/', async (res, req) => {
-
+productRouter.get('/', async (req, res) => {
+    
     const productos = await ProductManager.getProducts();
     const limit = req.query.limit;
     if (limit && !isNaN(Number(limit))) {
@@ -16,23 +16,24 @@ productRouter.get('/', async (res, req) => {
 });
 
 
-productRouter.get('/:pid', (res, req) => {
+productRouter.get('/:pid', (req, res) => {
     let {pid} = +req.params;
     const productid = this.products.find(prod => prod.id === Number(req.params.id))
     res.send(productid);
 });
 
 
-productRouter.post('/:pid', (res,req) => {
-    const producto = req.body;
-    if (!title && !description && !price && !category && !code && !stock){
-        return res.status(400).send({status:"error",error:"Campos incompletos"})
-    }
-    console.log(req.body)
-    res.send({status:"success",message:"Producto ingresado", producto})
+productRouter.post('/:pid', (req,res) => {
+    const {title,description,price,category,code,stock} = req.body;
+    
+     if (!title && !description && !price && !category && !code && !stock){
+         return res.status(400).send({status:"error",error:"Campos incompletos"})
+     }
+    
+     res.send({status:"success",message:"Producto ingresado",producto:req.body})
 })
 
-productRouter.put('/:pid', (res,req) => {
+productRouter.put('/:pid', (req,res) => {
     const {pid} = req.params;
     const producto = req.body;
     productoId = producto.find ((c) => c.id === +req.params.id);
@@ -47,7 +48,7 @@ productRouter.put('/:pid', (res,req) => {
     res.send ("Se ha actualizado el producto");
 })
 
-productRouter.delete('/:pid', (res,req) => {
+productRouter.delete('/:pid', (req,res) => {
     producto = producto.filter ((c) => c.id !== +req.params.id);
     res.send ("Se elimino el producto");
 })

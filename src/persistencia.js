@@ -61,8 +61,8 @@ class ProductManager {
     }
 }
 
-productManager = new ProductManager('./database/productos.json');
+const productManager = new ProductManager('./public/productos.json');
 
-module.exports = ProductManager;
+module.exports = productManager;
 
 
