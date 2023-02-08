@@ -1,6 +1,6 @@
 const express = require ("express");
 const productRouter = express.Router();
-const ProductManager = require ("../persistencia")
+const ProductManager = require ("../dao/persistencia")
 
 
 
