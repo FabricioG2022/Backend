@@ -1,13 +1,14 @@
 const express = require("express");
-
+const modelProduct = require("../routers/productRouter")
 const router = express.Router();
 
-router.get('/',(req,res)=>{
-    res.render('index',{ });
+
+router.get('/products',(req,res) => { 
+    res.render('index',{modelProduct});
 })
 
-router.get('/realTimeProducts',(req,res)=>{
-    res.render('index',{});
+router.post('/products',(req,res)=>{
+    const { title, description, price, category, code, stock } = req.body;
 })
 
 module.exports = router;
