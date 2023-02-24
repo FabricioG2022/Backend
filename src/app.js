@@ -9,6 +9,11 @@ const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const productsRouter = require ('./routes/products.routes');
 const cartsRouter = require ('./routes/carts.routes');
+const loginRouter = require ('./routes/login.routes');
+const signUpRouter = require ('./routes/signUp.routes');
+const profileRouter = require ('./routes/profile.routes');
+
+mongoose.set('strictQuery', true)
 
 dotenv.config();
 
@@ -29,9 +34,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/api/productos', productsRouter);
-app.use('/api/carrito', cartsRouter)
-
-
+app.use('/api/carrito', cartsRouter);
+app.use('/login', loginRouter);
+app.use('/signUp', signUpRouter);
+app.use('/profile', profileRouter)
 
 
 

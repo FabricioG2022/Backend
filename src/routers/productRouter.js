@@ -1,36 +1,31 @@
 const express = require("express");
 const productRouter = express.Router();
-const mongoosePaginate = require ("mongoose-paginate-v2");
-const productsModel = require ("../dao/models/products.model");
+const mongoosePaginate = require("mongoose-paginate-v2");
+const productsModel = require("../dao/models/products.model");
 
 
 productRouter.get('/', async (req, res) => {
     const opciones = {
         limit: parseInt(req.query.limit, 10) || 10,
         page: parseInt(req.query.page, 10) || 1,
-        sort: parseInt(req.query.sort)
+        sort: parseInt(req.query.sort, 1) || null
     };
-try {
-    const modelProduct = await productsModel.paginate({}, opciones )
-    const limit = req.query.limit;
-    if (limit && !isNaN(Number(limit))) {
-        respuesta = this.products.slice(0, limit);
+    try {
+        const modelProduct = await productsModel.paginate({}, opciones)
+        res.send(modelProduct);
+    } catch (error) {
+        console.log(error)
     }
 
-    res.send(modelProduct);
-}catch (error) {
-    console.log(error)
-}
-    
 });
 
 
 productRouter.get('/:pid', async (req, res) => {
     try {
-       const product = await productsModel.findById(req.params.id);
-       if(!product)
-       return res.status(404).json({message: "The product was not  found"});
-       res.json (product);
+        const product = await productsModel.findById(req.params.id);
+        if (!product)
+            return res.status(404).json({ message: "The product was not found" });
+        res.json(product);
     } catch (error) {
         console.log(error)
     }
@@ -41,15 +36,15 @@ productRouter.get('/:pid', async (req, res) => {
 
 productRouter.post('/', async (req, res) => {
     try {
-        const { title, description, price, category, code, stock } = req.body;
+        const { title, description, code, price, thumbnail, stock, category, status } = req.body;
         const newProduct = new productsModel(req.body);
         const productSaved = await newProduct.save();
-        if (!title && !description && !price && !category && !code && !stock) {
+        if (!title && !description && !code && !price && !thumbnail && !stock && !category &&!status) {
             return res.status(400).send({ status: "error", error: "Campos incompletos" })
         }
 
         res.send({ status: "success", message: "Producto ingresado", producto: productSaved })
-        console.log(req.body) 
+        console.log(req.body)
     } catch (error) {
         console.log(error)
     }
@@ -62,7 +57,7 @@ productRouter.put('/:pid', async (req, res) => {
     const productUpdated = await productsModel.findByIdAndUpdate(
         req.params.id,
         req.body,
-        {new:false}
+        { new: false }
     );
     res.send(productUpdated);
 })
