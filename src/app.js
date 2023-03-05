@@ -1,14 +1,12 @@
 const express = require("express");
 const app = express();
-const cartRouter = require('./routers/cartRouter');
-const productRouter = require('./routers/productRouter');
+const cartRouter = require('./routes/cartRouter');
+const productRouter = require('./routes/productRouter');
 const handlebars = require('express-handlebars');
 const { Server } = require('socket.io');
-const viewsRouter = require('./routers/views.router');
+const viewsRouter = require('./routes/views.router');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
-const productsRouter = require ('./routes/products.routes');
-const cartsRouter = require ('./routes/carts.routes');
 const loginRouter = require ('./routes/login.routes');
 const signUpRouter = require ('./routes/signUp.routes');
 const profileRouter = require ('./routes/profile.routes');
@@ -20,9 +18,7 @@ dotenv.config();
 
 
 app.engine('handlebars', handlebars.engine());
-
 app.set('views', __dirname + '/views');
-
 app.set('view engine', 'handlebars');
 
 
@@ -33,8 +29,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
-app.use('/api/productos', productsRouter);
-app.use('/api/carrito', cartsRouter);
 app.use('/login', loginRouter);
 app.use('/signUp', signUpRouter);
 app.use('/profile', profileRouter)
