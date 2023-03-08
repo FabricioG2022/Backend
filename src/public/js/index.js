@@ -5,7 +5,7 @@ const elementExists = (id) => document.getElementById(id) !== null;
 elementExists("submit") && document.getElementById("submit").addEventListener("click", (e) => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
-    fetch("/signup", {
+    fetch("/login", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
@@ -13,16 +13,18 @@ elementExists("submit") && document.getElementById("submit").addEventListener("c
         body: JSON.stringify({
             username,
             password
-        }).then((res) => res.json())
-            .then((data) => {
-                if (data.message === "success") {
+        }),
+    })   
+        .then(res => res.json())
+        .then(data => {
+            if (data === "success") {
+                window.location.href = "/profile";
+            } else {
+                alert("Algo ha pasado");
+            }
+        })
+        .catch((error) => console.log(error))
 
-                } else {
-                    alert("Algo ha pasado");
-                }
-            })
-            .catch((error) => console.log(error))
-    })
 });
 
 elementExists("signup") && document.getElementById("signup").addEventListener("click", (e) => {

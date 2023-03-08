@@ -8,8 +8,12 @@ const viewsRouter = require('./routes/views.router');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const loginRouter = require ('./routes/login.routes');
-const signUpRouter = require ('./routes/signUp.routes');
+const signUpRouter = require ('./routes/register.routes');
 const profileRouter = require ('./routes/profile.routes');
+const passport = require ('passport');
+const initializePassport = require ('../src/config/passport.config');
+const session = require ('express-session');
+const sessionsRouter = require ('./routes/sessions.routes')
 
 mongoose.set('strictQuery', true)
 
@@ -31,7 +35,16 @@ app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
 app.use('/login', loginRouter);
 app.use('/signUp', signUpRouter);
-app.use('/profile', profileRouter)
+app.use('/profile', profileRouter);
+app.use('/api/sessions',sessionsRouter);
+app.use(session({
+    secret: "CoderSecrets",
+    resave: true,
+    saveUninitialized: true
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 
 
@@ -65,4 +78,6 @@ const environment = async () => {
 };
 
 environment();
+initializePassport();
+
 

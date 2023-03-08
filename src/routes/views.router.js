@@ -3,12 +3,12 @@ const modelProduct = require("./productRouter")
 const router = express.Router();
 
 
-router.get('/products',(req,res) => { 
+router.get('/', async(req,res) => { 
     res.render('index',{modelProduct});
 })
 
-router.post('/products',(req,res)=>{
-    const { title, description, price, category, code, stock } = req.body;
+router.get('/login', async(req,res) => {
+    res.render('/login');
 })
-
 module.exports = router;
+
