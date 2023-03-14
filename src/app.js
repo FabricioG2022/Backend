@@ -1,19 +1,20 @@
 const express = require("express");
 const app = express();
-const cartRouter = require('./routes/cartRouter');
-const productRouter = require('./routes/productRouter');
+const cartRouter = require('./routes/cart.routes');
+const productRouter = require('./routes/products.routes');
 const handlebars = require('express-handlebars');
 const { Server } = require('socket.io');
-const viewsRouter = require('./routes/views.router');
+const viewsRouter = require('./routes/views.routes');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
-const loginRouter = require ('./routes/login.routes');
-const signUpRouter = require ('./routes/register.routes');
-const profileRouter = require ('./routes/profile.routes');
-const passport = require ('passport');
-const initializePassport = require ('../src/config/passport.config');
-const session = require ('express-session');
-const sessionsRouter = require ('./routes/sessions.routes')
+const loginRouter = require('./routes/login.routes');
+const signUpRouter = require('./routes/register.routes');
+const profileRouter = require('./routes/profile.routes');
+const passport = require('passport');
+const initializePassport = require('../src/config/passport.config');
+const session = require('express-session');
+const sessionsRouter = require('./routes/sessions.routes');
+const MongoStore = require ('connect-mongo')
 
 mongoose.set('strictQuery', true)
 
@@ -27,7 +28,7 @@ app.set('view engine', 'handlebars');
 
 
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 app.use('/', viewsRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -36,8 +37,13 @@ app.use('/api/carts', cartRouter);
 app.use('/login', loginRouter);
 app.use('/signUp', signUpRouter);
 app.use('/profile', profileRouter);
-app.use('/api/sessions',sessionsRouter);
+app.use('/api/sessions', sessionsRouter);
 app.use(session({
+    store: MongoStore.create({
+        mongoUrl: `mongodb+srv://CoderGodoy:Backend2023*@codercluster.wtridr1.mongodb.net/ecommerce?retryWrites=true&w=majority`,
+        mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true },
+        ttl: 10000,
+    }),
     secret: "CoderSecrets",
     resave: true,
     saveUninitialized: true

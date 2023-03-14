@@ -1,0 +1,61 @@
+body {
+    background: green;
+    width: 100%;
+}
+
+.titulo {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 100px;
+    background-color: tan;
+    font-family:sans-serif;
+}
+
+.titulo:hover {
+    color: wheat;
+    cursor: pointer;
+    transition: all 800ms;
+}
+
+.carritoLog {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btnCarrito {
+    background-color: tan;
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-weight: 700;
+    font-family:sans-serif;
+    padding: 7px;
+    border-radius: 10px;
+}
+
+.btnCarrito:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    transition: all 900ms;
+    border: 2px tan dashed;
+}
+
+.btnLogout {
+    background-color: tan;
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-weight: 700;
+    font-family:sans-serif;
+    margin-right: 50px;
+    border-radius: 10px;
+}
+
+.btnLogout:hover {
+    color: white;
+    background-color: black;
+    cursor: pointer;
+    transition: all 900ms;
+    border: 2px tan dashed;
+}

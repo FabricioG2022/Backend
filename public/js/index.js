@@ -2,7 +2,7 @@ const socket = io();
 socket.emit('message', 'Hola')
 const elementExists = (id) => document.getElementById(id) !== null;
 
-elementExists("submit") && document.getElementById("submit").addEventListener("click", (e) => {
+elementExists("login") && document.getElementById("login").addEventListener("click", (e) => {
     const username = document.getElementById("username").value;
     const password = document.getElementById("password").value;
     fetch("/login", {
@@ -46,24 +46,23 @@ elementExists("signup") && document.getElementById("signup").addEventListener("c
             password,
             age
         }).then((res) => res.json())
-            .then((data) => console.log(data))
+        .then(data => {
+            if (data === "success") {
+                window.location.href = "/profile";
+            } else {
+                alert("Complete los campos por favor");
+            }
+        })
             .catch((error) => console.log(error))
     })
 })
 
-const fetchContenido = async () => {
-    const response = await fetch("http://localhost:8080/api/product");
-    const data = await response.json();
-    const myElement = document.getElementById("contenido");
-    myElement.innerHTML = data.payload.map((product) => {
-        return `<div>
-        <img src="${product.thumbnail} alt="...">
-        <div>
-        <h5>${product.title}</h5>
-        <p>${product.description}</p>
-        <p>${product.price}</p>
-        <a href="#">Go</a>
-        </div>
-        </div>`
-    })
+
+
+const products = () => {
+    const getProduct = async (limit = 2, page = 1) => {
+        const product = await fetch (`/api/products/?limit=${limit}&page=${page}`)
+        const result = await product.json()
+        return result
+    }
 }

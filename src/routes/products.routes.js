@@ -4,6 +4,7 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const productsModel = require("../dao/models/products.model");
 
 
+
 productRouter.get('/', async (req, res) => {
     const opciones = {
         limit: parseInt(req.query.limit, 10) || 10,

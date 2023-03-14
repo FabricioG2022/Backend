@@ -1,0 +1,49 @@
+body {
+    background: green;
+    width: 100%;
+}
+
+.sign {
+    background-color: black;
+    width: 50%;
+    border-radius: 10px;
+    display: flex;
+    margin:auto;
+    flex-direction: column;
+    margin-top: 80px;
+    align-items: center;
+    justify-content: center;
+    height: 400px;
+    
+}
+
+.signinput {
+    height: 40px;
+    width: 400px;
+    border-radius: 10px;
+}
+
+.signinput::-webkit-input-placeholder {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    
+}
+
+.crearUsuario {
+    height: 35px;
+    width: 300px;
+    margin-left: 50px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.crearUsuario:hover {
+    cursor: pointer;
+    color: white;
+    background-color: black;
+    transition: all 800ms;
+    border: 4px white solid;
+}
+
