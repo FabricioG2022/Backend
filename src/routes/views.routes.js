@@ -26,6 +26,14 @@ router.get('/signUp', (req,res) => {
     
 })
 
+router.get('/carts', (req,res) => {
+    res.render('carts', {
+        title: 'Carrito',
+        style: 'carts.css'
+    });
+    
+})
+
 
 module.exports = router;
 

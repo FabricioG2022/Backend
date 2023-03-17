@@ -20,6 +20,7 @@ body {
 .carritoLog {
     display: flex;
     justify-content: space-between;
+    height: 25%;
 }
 
 .btnCarrito {
@@ -50,6 +51,7 @@ body {
     font-family:sans-serif;
     margin-right: 50px;
     border-radius: 10px;
+    height: 50px;
 }
 
 .btnLogout:hover {
@@ -58,4 +60,28 @@ body {
     cursor: pointer;
     transition: all 900ms;
     border: 2px tan dashed;
+}
+
+.paginas {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    height: 25%;
+    justify-content: center;
+}
+
+.btnAnterior {
+    background-color: tan;
+    font-size: 28px;
+    margin-bottom: 30px;
+    margin-left: 50px;
+    font-weight: 700;
+    font-family:sans-serif;
+    margin-right: 50px;
+    border-radius: 10px;
+}
+
+.spanPagina {
+    font-size: 24px;
+    
 }
