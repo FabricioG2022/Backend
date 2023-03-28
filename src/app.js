@@ -14,8 +14,10 @@ const passport = require('passport');
 const initializePassport = require('../src/config/passport.config');
 const session = require('express-session');
 const sessionsRouter = require('./routes/sessions.routes');
-const MongoStore = require ('connect-mongo')
-
+const MongoStore = require('connect-mongo');
+const cors = require('cors');
+const config = require('../src/config')
+console.log(config)
 mongoose.set('strictQuery', true)
 
 dotenv.config();
@@ -27,17 +29,10 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'handlebars');
 
 
-
+app.use(cors());
 app.use(express.static('public'));
-app.use('/', viewsRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/api/products', productRouter);
-app.use('/api/carts', cartRouter);
-app.use('/login', loginRouter);
-app.use('/signUp', signUpRouter);
-app.use('/profile', profileRouter);
-app.use('/api/sessions', sessionsRouter);
 app.use(session({
     store: MongoStore.create({
         mongoUrl: `mongodb+srv://CoderGodoy:Backend2023*@codercluster.wtridr1.mongodb.net/ecommerce?retryWrites=true&w=majority`,
@@ -87,3 +82,10 @@ environment();
 initializePassport();
 
 
+app.use('/', viewsRouter);
+app.use('/api/products', productRouter);
+app.use('/api/carts', cartRouter);
+app.use('/login', loginRouter);
+app.use('/signUp', signUpRouter);
+app.use('/profile', profileRouter);
+app.use('/api/sessions', sessionsRouter);

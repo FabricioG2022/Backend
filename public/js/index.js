@@ -1,4 +1,5 @@
 const socket = io();
+const fetch = require("node-fetch");
 socket.emit('message', 'Hola')
 const elementExists = (id) => document.getElementById(id) !== null;
 
@@ -14,16 +15,11 @@ elementExists("login") && document.getElementById("login").addEventListener("cli
             username,
             password
         }),
-    })   
+    })
         .then(res => res.json())
-        .then(data => {
-            if (data === "success") {
-                window.location.href = "/profile";
-            } else {
-                alert("Algo ha pasado");
-            }
-        })
-        .catch((error) => console.log(error))
+        .then(data => console.log(data))
+
+
 
 });
 
@@ -45,14 +41,16 @@ elementExists("signup") && document.getElementById("signup").addEventListener("c
             email,
             password,
             age
-        }).then((res) => res.json())
-        .then(data => {
-            if (data === "success") {
-                window.location.href = "/profile";
-            } else {
-                alert("Complete los campos por favor");
-            }
         })
+            .then((res) => res.json())
+            .then(data => {
+
+                if (!first_name && !last_name && !email && !password && !age) {
+                    return alert("Complete los campos por favor")
+                } else {
+                    window.location.replace("http://localhost:8080/login")
+                }
+            })
             .catch((error) => console.log(error))
     })
 })
@@ -61,8 +59,14 @@ elementExists("signup") && document.getElementById("signup").addEventListener("c
 
 const products = () => {
     const getProduct = async (limit = 2, page = 1) => {
-        const product = await fetch (`/api/products/?limit=${limit}&page=${page}`)
+        const product = await fetch(`/api/products/?limit=${limit}&page=${page}`)
         const result = await product.json()
         return result
     }
 }
+
+const identification = document.getElementById("identification")
+
+identification.addEventListener("click", () => {
+    window.location.replace("http://localhost:8080/login")
+})

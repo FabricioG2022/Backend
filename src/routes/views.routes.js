@@ -1,38 +1,14 @@
 const express = require("express");
-const modelProduct = require("./products.routes.js")
 const router = express();
+const {renderProduct, renderLogin, renderSign, renderCarts} = require ('../controllers/views.controller');
 
+router.get('/', renderProduct);
 
-router.get('/', (req,res) => { 
-    res.render('products', {
-        title: 'Home page',
-        style: 'product.css'
-    })
-})
+router.get('/login', renderLogin);
 
-router.get('/login', (req,res) => {
-    res.render('login', {
-        title: 'Login',
-        style: 'login.css'
-    });
-    
-})
+router.get('/signUp', renderSign);
 
-router.get('/signUp', (req,res) => {
-    res.render('signUp', {
-        title: 'Registro',
-        style: 'signUp.css'
-    });
-    
-})
-
-router.get('/carts', (req,res) => {
-    res.render('carts', {
-        title: 'Carrito',
-        style: 'carts.css'
-    });
-    
-})
+router.get('/carts', renderCarts);
 
 
 module.exports = router;
