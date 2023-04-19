@@ -31,19 +31,25 @@ productsCtrl.prodGetPid = async (req, res) => {
 
 };
 
-productsCtrl.prodPost = async (req, res) => {
+productsCtrl.prodPost = async (req, res, next) => {
     try {
         const { title, description, code, price, thumbnail, stock, category, status } = req.body;
         const newProduct = new productsModel(req.body);
         const productSaved = await newProduct.save();
         if (!title && !description && !code && !price && !thumbnail && !stock && !category &&!status) {
-            return res.status(400).send({ status: "error", error: "Campos incompletos" })
+            //return res.status(400).send({ status: "error", error: "Campos incompletos" })
+            CustomError.createError({
+                name:"Product creation error",
+                cause: generateProductsErrorInfo({title, description, code, price, thumbnail, stock, category, status}),
+                message:"Error trying to create Product",
+                code: EErrors.INVALID_TYPES_ERROR
+            })
         }
 
         res.send({ status: "success", message: "Producto ingresado", producto: productSaved })
         console.log(req.body)
     } catch (error) {
-        console.log(error)
+        next(error);
     }
 
 };

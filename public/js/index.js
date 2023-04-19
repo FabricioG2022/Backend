@@ -12,12 +12,18 @@ elementExists("login") && document.getElementById("login").addEventListener("cli
             "Content-type": "application/json",
         },
         body: JSON.stringify({
-            username,
+            use,
             password
         }),
     })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then(data => {
+            if (data.status === 200){
+                window.location.href='/api/login/products'
+            }else{
+                alert ('Usuario o contraseña incorrecta')
+            }
+        })
 
 
 
@@ -29,19 +35,14 @@ elementExists("signup") && document.getElementById("signup").addEventListener("c
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
     const age = document.getElementById("age").value;
+    const data = { first_name, last_name, email, password, age}
 
     fetch("/signup", {
         method: "POST",
         headers: {
             "Content-type": "application/json",
         },
-        body: JSON.stringify({
-            first_name,
-            last_name,
-            email,
-            password,
-            age
-        })
+        body: JSON.stringify(data)
             .then((res) => res.json())
             .then(data => {
 
@@ -49,6 +50,7 @@ elementExists("signup") && document.getElementById("signup").addEventListener("c
                     return alert("Complete los campos por favor")
                 } else {
                     window.location.replace("http://localhost:8080/login")
+                    return data
                 }
             })
             .catch((error) => console.log(error))

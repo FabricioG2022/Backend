@@ -8,6 +8,7 @@ const viewsRouter = require('./routes/views.routes');
 const dotenv = require("dotenv");
 const { default: mongoose } = require("mongoose");
 const loginRouter = require('./routes/login.routes');
+const userRoutes = require('./routes/users.routes');
 const signUpRouter = require('./routes/register.routes');
 const profileRouter = require('./routes/profile.routes');
 const passport = require('passport');
@@ -16,7 +17,9 @@ const session = require('express-session');
 const sessionsRouter = require('./routes/sessions.routes');
 const MongoStore = require('connect-mongo');
 const cors = require('cors');
-const config = require('../src/config')
+const config = require('../src/config/config');
+const mockingRouter = require('./routes/mockingProducts.routes');
+const errorHandler = require('./middlewares/errors/error');
 console.log(config)
 mongoose.set('strictQuery', true)
 
@@ -85,7 +88,10 @@ initializePassport();
 app.use('/', viewsRouter);
 app.use('/api/products', productRouter);
 app.use('/api/carts', cartRouter);
+app.use('/signin', userRoutes);
 app.use('/login', loginRouter);
-app.use('/signUp', signUpRouter);
+app.use('/signup', userRoutes);
 app.use('/profile', profileRouter);
 app.use('/api/sessions', sessionsRouter);
+app.use('/mockingproducts', mockingRouter);
+app.use(errorHandler);

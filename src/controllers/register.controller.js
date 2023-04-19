@@ -1,7 +1,7 @@
 const registerCtrl = {}
 
 const usersModel = require('../dao/models/users.model');
-const createHash = require('../../utils');
+const createHash = require('../config/utils');
 
 registerCtrl.renderSign = (req, res) => {
     res.render('signUp')

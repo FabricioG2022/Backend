@@ -1,23 +1,23 @@
 <div class="sign">
-    <form id="form" method="get">
+    <form action="/signup" method="POST">
         <div>
-            <input class="signinput" id="first_name" name="first_name" type="text" placeholder="Nombre" autocomplete="off"/>
+            <input class="signinput" id="first_name" name="first_name" type="text" placeholder="Nombre" autocomplete="off" value="{{first_name}}"/>
         </div>
         <br>
         <div>
-            <input class="signinput" id="email" name="email" type="email" placeholder="Correo electronico" autocomplete="off"/>
+            <input class="signinput" id="email" name="email" type="email" placeholder="Correo electronico" autocomplete="off" value="{{email}}"/>
         </div>
         <br>
         <div>
-            <input class="signinput" id="last_name" name="last_name" type="text" placeholder="Apellido" autocomplete="off"/>
+            <input class="signinput" id="last_name" name="last_name" type="text" placeholder="Apellido" autocomplete="off" value="{{last_name}}"/>
         </div>
         <br>
         <div>
-            <input class="signinput" id="age" name="age" type="text" placeholder="Edad" autocomplete="off"/>
+            <input class="signinput" id="age" name="age" type="text" placeholder="Edad" autocomplete="off" value="{{age}}"/>
         </div>
         <br>
         <div>
-            <input class="signinput" id="password" name="password" type="password" placeholder="Password" autocomplete="off"/>
+            <input class="signinput" id="password" name="password" type="password" placeholder="Password" autocomplete="off" value="{{password}}"/>
         </div>
         <br>
         <br>
@@ -26,3 +26,6 @@
         </div>
     </form>
 </div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/index.js"></script>
