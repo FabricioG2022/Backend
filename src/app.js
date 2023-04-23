@@ -20,6 +20,8 @@ const cors = require('cors');
 const config = require('../src/config/config');
 const mockingRouter = require('./routes/mockingProducts.routes');
 const errorHandler = require('./middlewares/errors/error');
+const {addLogger} = require('./config/logger');
+const loggerTest = require('./routes/loggerTest.routes');
 console.log(config)
 mongoose.set('strictQuery', true)
 
@@ -48,9 +50,6 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
-
-
 
 const httpServer = app.listen(8080, () => { console.log("Servidor levantado") });
 const socketServer = new Server(httpServer);
@@ -94,4 +93,6 @@ app.use('/signup', userRoutes);
 app.use('/profile', profileRouter);
 app.use('/api/sessions', sessionsRouter);
 app.use('/', mockingRouter);
+app.use('/', loggerTest);
 app.use(errorHandler);
+app.use(addLogger);
