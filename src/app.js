@@ -93,5 +93,5 @@ app.use('/login', loginRouter);
 app.use('/signup', userRoutes);
 app.use('/profile', profileRouter);
 app.use('/api/sessions', sessionsRouter);
-app.use('/mockingproducts', mockingRouter);
+app.use('/', mockingRouter);
 app.use(errorHandler);

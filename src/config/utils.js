@@ -27,4 +27,4 @@ const generateProduct = () =>{
 
 
 
-module.exports = createHash, isValidPassword, generateProduct
+module.exports = {createHash, isValidPassword, generateProduct}
